@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const outputPath = path.resolve(__dirname, "output", "team.html");
+const outputPath = path.resolve(__dirname, "finalHTML", "employeeTeam.html");
 
 const render = require("./lib/htmlRenderer");
 
@@ -30,7 +30,7 @@ function appMenu() {
             {
                 type: "input",
                 name: "managerId",
-                message: "What is your manager's id?",
+                message: "Please enter employee's ID #",
                 validate: answer => {
                     const pass = answer.match(
                         /^[1-9]\d*$/
@@ -43,7 +43,7 @@ function appMenu() {
             {
                 type: "input",
                 name: "managerEmail",
-                message: "What is your manager's email?",
+                message: "Please enter employee's email address",
                 validate: answer => {
                     const pass = answer.match(
                         /\S+@\S+\.\S+/
@@ -103,7 +103,7 @@ function appMenu() {
             {
                 type: "input",
                 name: "engineerId",
-                message: "What is your engineer's id?",
+                message: "Please enter employee's ID #",
                 validate: answer => {
                     const pass = answer.match(
                         /^[1-9]\d*$/
@@ -116,7 +116,7 @@ function appMenu() {
             {
                 type: "input",
                 name: "engineerEmail",
-                message: "What is your engineer's email?",
+                message: "Please enter employee's email address",
                 validate: answer => {
                     const pass = answer.match(
                         /\S+@\S+\.\S+/
@@ -125,19 +125,9 @@ function appMenu() {
                         return true;
                     }
                 }
-            },
-            {
-                type: "input",
-                name: "engineerGithub",
-                message: "What is your engineer's GitHub username?",
-                validate: answer => {
-                    if (answer !== "") {
-                        return true;
-                    }
-                }
             }
         ]).then(answers => {
-            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail);
             teamMembers.push(engineer);
             idArray.push(answers.engineerId);
             createTeam();
@@ -160,7 +150,7 @@ function appMenu() {
             {
                 type: "input",
                 name: "internId",
-                message: "What is your intern's id?",
+                message: "Please enter employee's ID #",
                 validate: answer => {
                     const pass = answer.match(
                         /^[1-9]\d*$/
@@ -170,12 +160,11 @@ function appMenu() {
                         }
 
                     }
-                }
-            },
+                },
             {
                 type: "input",
                 name: "internEmail",
-                message: "What is your intern's email?",
+                message: "Please enter employee's email address",
                 validate: answer => {
                     const pass = answer.match(
                         /\S+@\S+\.\S+/
@@ -184,19 +173,9 @@ function appMenu() {
                         return true;
                     }
                 }
-            },
-            {
-                type: "input",
-                name: "internSchool",
-                message: "What is your intern's school?",
-                validate: answer => {
-                    if (answer !== "") {
-                        return true;
-                    }
-                }
             }
         ]).then(answers => {
-            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+            const intern = new Intern(answers.internName, answers.internId, answers.internEmail);
             teamMembers.push(intern);
             idArray.push(answers.internId);
             createTeam();
