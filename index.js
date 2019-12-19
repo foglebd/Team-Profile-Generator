@@ -71,7 +71,7 @@ function appMenu() {
                 choices: [
                     "Engineer",
                     "Intern",
-                    "I don't want to add any more team members"
+                    "Finished"
                 ]
             }
         ]).then(userChoice => {
